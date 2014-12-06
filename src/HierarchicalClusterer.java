@@ -1171,7 +1171,7 @@ public class HierarchicalClusterer extends AbstractClusterer implements
   }
 
   public static void main(String[] argv) {
-    runClusterer(new HierarchicalClusterer(), argv);
+    runClusterer(new MyAgglomerative(), argv);
   }
 
   @Override

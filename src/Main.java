@@ -7,7 +7,7 @@ import weka.core.converters.ConverterUtils.DataSource;
 
 public class Main {
 	public static void main(String args[]) throws Exception {
-		DataSource source = new DataSource("D:/weather.clustering.arff");
+		DataSource source = new DataSource("E:/workspace/MYClustering/weather.clustering.arff");
 		Instances data = source.getDataSet();
 		
 		System.out.println("===============K-Means===============");
@@ -22,10 +22,14 @@ public class Main {
 		System.out.println("# of clusters: " + eval.getNumClusters());  // output # of clusters
 		System.out.println(kmeans.toString());
 		
+		System.out.println("****************************");
+		System.out.println(eval.clusterResultsToString());
+		System.out.println("****************************");
+		
 
 		System.out.println("===============Hirarkikal===============");
 		//train 
-		HierarchicalClusterer hirarkikal = new HierarchicalClusterer();   // new instance of clusterer
+		MyAgglomerative hirarkikal = new MyAgglomerative();   // new instance of clusterer
 		hirarkikal.buildClusterer(data);    // build the clusterer
 		
 		//Hirarkikal
@@ -33,6 +37,9 @@ public class Main {
 		eval.evaluateClusterer(data);                                // data to evaluate the clusterer on
 		System.out.println("# of clusters: " + eval.getNumClusters());  // output # of clusters
 		System.out.println(hirarkikal.graph());
+		System.out.println("****************************");
+		System.out.println(eval.clusterResultsToString());
+		System.out.println("****************************");
 		
 	}
 }
