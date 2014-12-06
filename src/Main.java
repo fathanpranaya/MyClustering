@@ -40,6 +40,6 @@ public class Main {
 		System.out.println("****************************");
 		System.out.println(eval.clusterResultsToString());
 		System.out.println("****************************");
-		
+//		
 	}
 }

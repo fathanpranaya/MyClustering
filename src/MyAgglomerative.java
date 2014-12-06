@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
@@ -108,6 +109,88 @@ public class MyAgglomerative extends AbstractClusterer implements
 			height = fLength1;
 			if (left != null) {
 				height += left.height;
+			}
+		}
+
+		public String toString(int attIndex) {
+			DecimalFormat myFormatter = new DecimalFormat("#.#####");
+
+			if (left == null) {
+				if (right == null) {
+					return "("
+							+ my_instances.instance(leftInstance).stringValue(
+									attIndex)
+							+ ":"
+							+ myFormatter.format(leftLength)
+							+ ","
+							+ my_instances.instance(rightInstance).stringValue(
+									attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				} else {
+					return "("
+							+ my_instances.instance(leftInstance).stringValue(
+									attIndex) + ":"
+							+ myFormatter.format(leftLength) + ","
+							+ right.toString(attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				}
+			} else {
+				if (right == null) {
+					return "("
+							+ left.toString(attIndex)
+							+ ":"
+							+ myFormatter.format(leftLength)
+							+ ","
+							+ my_instances.instance(rightInstance).stringValue(
+									attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				} else {
+					return "(" + left.toString(attIndex) + ":"
+							+ myFormatter.format(leftLength) + ","
+							+ right.toString(attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				}
+			}
+		}
+
+		public String toString2(int attIndex) {
+			DecimalFormat myFormatter = new DecimalFormat("#.#####");
+
+			if (left == null) {
+				if (right == null) {
+					return "("
+							+ my_instances.instance(leftInstance).value(
+									attIndex)
+							+ ":"
+							+ myFormatter.format(leftLength)
+							+ ","
+							+ my_instances.instance(rightInstance).value(
+									attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				} else {
+					return "("
+							+ my_instances.instance(leftInstance).value(
+									attIndex) + ":"
+							+ myFormatter.format(leftLength) + ","
+							+ right.toString2(attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				}
+			} else {
+				if (right == null) {
+					return "("
+							+ left.toString2(attIndex)
+							+ ":"
+							+ myFormatter.format(leftLength)
+							+ ","
+							+ my_instances.instance(rightInstance).value(
+									attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				} else {
+					return "(" + left.toString2(attIndex) + ":"
+							+ myFormatter.format(leftLength) + ","
+							+ right.toString2(attIndex) + ":"
+							+ myFormatter.format(rightLength) + ")";
+				}
 			}
 		}
 	}
@@ -357,6 +440,11 @@ public class MyAgglomerative extends AbstractClusterer implements
 			}
 		}
 		String sNewick = null;
+		if (my_instances.attribute(attIndex).isString()) {
+			sNewick = m_clusters[0].toString(attIndex);
+		} else {
+			sNewick = m_clusters[0].toString2(attIndex);
+		}
 		return "Newick:" + sNewick;
 	}
 

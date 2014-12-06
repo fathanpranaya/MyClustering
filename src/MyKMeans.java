@@ -24,7 +24,7 @@ NumberOfClustersRequestable, WeightedInstancesHandler {
 	/** for serialization. */
 	static final long serialVersionUID = -3235809600124455376L;
 
-	protected int n_cluster = 4; //parameter
+	protected int n_cluster = 2; //parameter
 	protected Instances initial_points;
 	protected Instances centroids;
 	protected int[][][] n_nominal;
